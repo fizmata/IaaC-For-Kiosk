@@ -1,0 +1,8 @@
+---
+  - name: monitoring server setup
+    hosts: monitoring
+    become: yes
+    roles:
+      - reverse_proxy
+      - grafana
+      - prometheus

@@ -1,0 +1,11 @@
+version: '3.7'
+
+services:
+  Grafana:
+    restart: on-failure
+    image: ubuntu:latest
+    ports:
+      - "1022:22"
+      - "1080:80"
+    command:
+      - bash

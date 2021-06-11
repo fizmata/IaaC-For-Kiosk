@@ -1,0 +1,43 @@
+
+domain: nuttn.go.
+
+grafana_port: 3000
+agama_port: 8000
+
+nginx_container_per_vm: 2
+
+ansible_become_password: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          36666464623832396337353061336539643331633535353061393064653732353763363761613736
+          3061613432326531363135346638633165383733353736310a363331313133643338633462366338
+          37346531383232623438303363383561393930383034613665393535353563313366616466646239
+          3331643134663230310a646361366139373165666632613935346464363435326239383537616231
+          3131
+
+
+
+prometheus_jobs:
+  - name: node
+    targets: "{{ groups['all'] }}"
+    port: 9100
+  - name: bind
+    targets:
+      - ns1
+      - ns2
+      - ns-master
+    port: 9119
+  - name: mysql
+    targets:
+      - db-master
+      - db-slave
+    port: 9104
+  - name: keepalive
+    targets:
+      - vm-1
+      - vm-2
+    port: 9165
+  - name: haproxy
+    targets:
+      - vm-1
+      - vm-2
+    port: 9101
